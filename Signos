@@ -1,0 +1,37 @@
+local clickDetector = script.Parent.ClickDetector
+
+local function alHacerClick(jugador)
+	local stats = jugador:FindFirstChild("leaderstats")
+	if not stats then 
+		print("❌ No se encontró leaderstats")
+		return 
+	end
+
+
+	local memoria = stats:FindFirstChild("Memoria")
+	local pantalla = stats:FindFirstChild("Pantalla")
+	local operador = stats:FindFirstChild("operacion")
+
+
+	if not (memoria and pantalla and operador) then
+		print("❌ Faltan valores: Memoria, Pantalla u Operacion")
+		return
+	end
+
+
+	operador.Value = "multiplicacion"  ---Resplasa "multiplicacion" por el signo que ocupes
+
+	memoria.Value = pantalla.Value
+
+	pantalla.Value = 0
+
+
+	print(" Operación Multiplicacion configurada") --- remplasa multiplicacion por el mismo signo que usaste antes
+	print("   Memoria = " .. memoria.Value)
+	print("   Pantalla = " .. pantalla.Value)
+	print("   Operación actual = " .. operador.Value)
+end
+
+clickDetector.MouseClick:Connect(alHacerClick)
+
+print("✅ Bloque 'Multiplicacion' listo") --- remplasa multiplicacion por el mismo signo que usaste antes
