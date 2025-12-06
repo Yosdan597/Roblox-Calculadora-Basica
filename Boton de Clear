@@ -1,0 +1,32 @@
+local clickDetector = script.Parent.ClickDetector
+
+local function alHacerClick(jugador)
+	-- 1. Buscar leaderstats
+	local stats = jugador:FindFirstChild("leaderstats")
+	if not stats then 
+		print("❌ No hay leaderstats")
+		return 
+	end
+
+	local pantalla = stats:FindFirstChild("Pantalla")
+	local memoria = stats:FindFirstChild("Memoria")       -- Con M mayúscula
+	local operacion = stats:FindFirstChild("operacion")   -- Con O mayúscula
+
+	if not (pantalla and memoria and operacion) then
+		print("❌ Faltan: Pantalla, Memoria u Operacion")
+		return
+	end
+
+	pantalla.Value = 0
+	memoria.Value = 0
+	operacion.Value = "ninguna"  -- Minúscula, como se creó inicialmente
+
+	print("🧹 TODO LIMPIADO:")
+	print("   Pantalla = " .. pantalla.Value)
+	print("   Memoria = " .. memoria.Value)
+	print("   Operacion = " .. operacion.Value)
+end
+
+clickDetector.MouseClick:Connect(alHacerClick)
+
+print("✅ Bloque 'C' (Clear) listo")
