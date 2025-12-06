@@ -1,0 +1,75 @@
+
+local function alHacerClick(jugador)
+
+	local stats = jugador:FindFirstChild("leaderstats")
+	if not stats then 
+		print("❌ No hay leaderstats")
+		return 
+	end
+
+
+	local pantalla = stats:FindFirstChild("Pantalla")
+	local memoria = stats:FindFirstChild("Memoria")
+	local operacion = stats:FindFirstChild("operacion") -- CON O MAYÚSCULA
+
+
+	if not (pantalla and memoria and operacion) then
+		print("❌ Faltan: Pantalla, Memoria u Operacion")
+		return
+	end
+
+
+	print("🔍 DEBUG - Valores actuales:")
+	print("   Pantalla = " .. pantalla.Value)
+	print("   Memoria = " .. memoria.Value)
+	print("   Operacion = '" .. operacion.Value .. "'")
+
+
+	if operacion.Value == "ninguna" then
+		print("⚠️ No hay operación seleccionada")
+		return
+	end
+
+
+	local resultado = 0
+
+	if operacion.Value == "suma" then
+		resultado = memoria.Value + pantalla.Value
+		print("➕ Calculando: " .. memoria.Value .. " + " .. pantalla.Value)
+
+	elseif operacion.Value == "resta" then
+		resultado = memoria.Value - pantalla.Value
+		print("➖ Calculando: " .. memoria.Value .. " - " .. pantalla.Value)
+
+	elseif operacion.Value == "multiplicacion" then
+		resultado = memoria.Value * pantalla.Value
+		print("✖️ Calculando: " .. memoria.Value .. " × " .. pantalla.Value)
+
+	elseif operacion.Value == "division" then
+		if pantalla.Value ~= 0 then
+			resultado = memoria.Value / pantalla.Value
+			print("➗ Calculando: " .. memoria.Value .. " ÷ " .. pantalla.Value)
+		else
+			print("⚠️ ¡Error! No se puede dividir entre cero")
+			return
+		end
+	else
+		print("⚠️ Operación desconocida: '" .. operacion.Value .. "'")
+		return
+	end
+
+
+	pantalla.Value = resultado
+	print("🟰 Resultado: " .. resultado)
+
+
+	memoria.Value = 0
+	operacion.Value = "ninguna"
+
+	print("✅ Cálculo completado. Pantalla ahora: " .. pantalla.Value)
+end
+
+
+clickDetector.MouseClick:Connect(alHacerClick)
+
+print("✅ Bloque 'IGUAL' (=) listo y CONECTADO")
