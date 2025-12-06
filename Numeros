@@ -1,0 +1,16 @@
+local clickDetector = script.Parent.ClickDetector
+
+local function alHacerClick(jugador)
+	local stats = jugador:FindFirstChild("leaderstats")
+	if not stats then return end
+
+	local pantalla = stats:FindFirstChild("Pantalla")
+	if pantalla then
+
+		local nuevoValor = tonumber(tostring(pantalla.Value) .. "1") --- remplasa el numero 1 por el numero que ocupes
+		pantalla.Value = nuevoValor
+		print("Pantalla ahora: " .. pantalla.Value)
+	end
+end
+
+clickDetector.MouseClick:Connect(alHacerClick)
