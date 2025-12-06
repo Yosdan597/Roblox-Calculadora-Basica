@@ -1,0 +1,38 @@
+local players = game:GetService("Players")
+local function configurarCalculador(jugador)
+	local stats = jugador:FindFirstChild("leaderstats")
+	if stats then
+		stats:Destroy()
+	end
+	stats = Instance.new("Folder")
+	stats.Name = "leaderstats"
+	stats.Parent = jugador
+	
+	local pantalla = Instance.new("NumberValue")
+	pantalla.Name = "Pantalla"
+	pantalla.Value = 0
+	pantalla.Parent = stats
+	
+	local memoria = Instance.new("NumberValue")
+	memoria.Name = "Memoria"
+	memoria.Value = 0
+	memoria.Parent = stats
+	
+	local operacion = Instance.new("StringValue")
+	operacion.Name = "operacion"
+	operacion.Value = "Ninguna"
+	operacion.Parent = stats
+	
+	
+	print("Calculadora configurada para " .. jugador.Name)
+	print(" Pantalla: " .. pantalla.Value )
+	print( "Memoria: " .. memoria.Value)
+	print( "Operacion " .. operacion.Value)	
+end
+players.PlayerAdded:Connect(configurarCalculador)
+for _, jugadorExistente in ipairs(Players:GetPlayers()) do
+	configurarCalculador(jugadorExistente)
+end
+
+print("Sistema de calculadora INICIADO")
+print(" Cada jufador tendra: Pantalla, Memoria, Operacion")
